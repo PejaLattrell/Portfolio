@@ -1,2 +1,3 @@
-#Read this
-I created this website to showcase some of my projects.
+<h1>Public notice</h1>
+
+<h3>I created this website to showcase my ongoing projects😌.</h3>
