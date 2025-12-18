@@ -265,13 +265,13 @@ section {
     border: none;
     cursor: pointer;
     font-size: 1rem;
+    margin-top: 10px;
 }
 
 .btn-primary {
     background: var(--gradient-1);
     color: white;
     box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
-    padding-top: 20px;
 }
 
 .btn-primary:hover {
@@ -616,6 +616,7 @@ section {
 .form-group textarea {
     resize: vertical;
     min-height: 150px;
+    max-height: 160px
 }
 
 /* Footer */
