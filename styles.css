@@ -271,6 +271,7 @@ section {
     background: var(--gradient-1);
     color: white;
     box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+    padding-top: 20px;
 }
 
 .btn-primary:hover {
@@ -590,6 +591,7 @@ section {
 .form-group label {
     color: var(--text-primary);
     font-weight: 500;
+    padding-top: 10px;
 }
 
 .form-group input,
