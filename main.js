@@ -1,8 +1,8 @@
-// Theme Toggle Functionality
+
 const themeToggle = document.getElementById('themeToggle');
 const body = document.body;
 
-// Check for saved theme preference or default to dark mode
+
 const currentTheme = localStorage.getItem('theme') || 'dark';
 if (currentTheme === 'light') {
     body.classList.add('light-mode');
@@ -12,15 +12,15 @@ if (currentTheme === 'light') {
 themeToggle.addEventListener('click', () => {
     body.classList.toggle('light-mode');
     
-    // Save preference to localStorage
+    
     const theme = body.classList.contains('light-mode') ? 'light' : 'dark';
     localStorage.setItem('theme', theme);
     
-    // Show notification
+    
     showNotification(`Switched to ${theme} mode! ✨`, 'success');
 });
 
-// Smooth scrolling for navigation links
+
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -34,7 +34,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Active navigation highlighting
+
 const sections = document.querySelectorAll('section');
 const navButtons = document.querySelectorAll('.navbar ul button');
 
@@ -89,29 +89,27 @@ window.addEventListener('scroll', () => {
     lastScroll = currentScroll;
 });
 
-// Contact form handling
+
 const contactForm = document.getElementById('contactForm');
 
 if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
-        // Get form data
+        
         const formData = {
             name: document.getElementById('name').value,
             email: document.getElementById('email').value,
             message: document.getElementById('message').value
         };
         
-        // Show success message (in a real app, you'd send this to a server)
         showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
         
-        // Reset form
         contactForm.reset();
     });
 }
 
-// Notification system
+
 function showNotification(message, type = 'success') {
     // Remove existing notification if any
     const existingNotification = document.querySelector('.notification');
@@ -119,12 +117,12 @@ function showNotification(message, type = 'success') {
         existingNotification.remove();
     }
     
-    // Create notification element
+    
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
     notification.textContent = message;
     
-    // Add styles
+    
     notification.style.cssText = `
         position: fixed;
         top: 100px;
@@ -141,14 +139,14 @@ function showNotification(message, type = 'success') {
     
     document.body.appendChild(notification);
     
-    // Remove after 3 seconds
+    
     setTimeout(() => {
         notification.style.animation = 'slideOutRight 0.3s ease-out';
         setTimeout(() => notification.remove(), 300);
     }, 3000);
 }
 
-// Add animation keyframes
+
 const style = document.createElement('style');
 style.textContent = `
     @keyframes slideInRight {
@@ -175,7 +173,7 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Intersection Observer for scroll animations
+
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -100px 0px'
@@ -190,7 +188,7 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe elements for animation
+
 document.addEventListener('DOMContentLoaded', () => {
     const animateElements = document.querySelectorAll('.project-card, .skill-item, .contact-item');
     animateElements.forEach(el => {
@@ -199,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Project card interactions
+
 const projectCards = document.querySelectorAll('.project-card');
 projectCards.forEach(card => {
     card.addEventListener('mouseenter', function() {
@@ -211,7 +209,7 @@ projectCards.forEach(card => {
     });
 });
 
-// Typing effect for subtitle (optional enhancement)
+
 function typeWriter(element, text, speed = 100) {
     let i = 0;
     element.textContent = '';
@@ -227,7 +225,7 @@ function typeWriter(element, text, speed = 100) {
     type();
 }
 
-// Initialize typing effect on load
+
 window.addEventListener('load', () => {
     const subtitle = document.querySelector('.home-content .subtitle');
     if (subtitle) {
