@@ -7,35 +7,29 @@
     <meta name="keywords" content="Data Engineer, Computer Science, Portfolio, Web Developer">
     <meta name="author" content="Peja Lattrell Escares">
     <title>Peja Lattrell Escares | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Navigation Header -->
-    <header>
-        <nav class="navbar">
-            <ul>
-                <button><a href="#home">Home</a></button>
-                <button><a href="#about">About</a></button>
-                <button><a href="#projects">Projects</a></button>
-                <button><a href="#contact">Contact</a></button>
-            </ul>
-            <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
-                <span class="theme-icon sun">☀️</span>
-                <span class="theme-icon moon">🌙</span>
-            </button>
-        </nav>
-    </header>
+
 
     <!-- Main Content -->
     <main>
-        <!-- Home Section -->
-        <section id="home">
-            <div class="home-content">
-                <h1>Hi, I'm Peja Lattrell Escares</h1>
-                <p class="subtitle">Computer Science Student & Aspiring Data Engineer</p>
-                <p>
-                    I'm a passionate computer science student at New Era University, 
-                    dedicated to mastering data engineering and building innovative solutions 
+        <!-- Hero / Home Section -->
+        <section id="home" class="hero-section">
+            <div class="hero-content">
+                <div class="hero-badge">👋 Open to opportunities</div>
+                <h1 class="hero-title">
+                    Hi, I'm Peja Lattrell Escares
+                    <span class="gradient-text">
+                        Computer Science Student &amp;<br>Aspiring Data Engineer
+                    </span>
+                </h1>
+                <p class="hero-subtitle">
+                    I'm a passionate computer science student at New Era University,
+                    dedicated to mastering data engineering and building innovative solutions
                     that transform raw data into meaningful insights.
                 </p>
                 <div class="cta-buttons">
@@ -43,54 +37,80 @@
                     <a href="#contact" class="btn btn-secondary">Get In Touch</a>
                 </div>
             </div>
+            <div class="hero-glow"></div>
         </section>
 
         <!-- About Section -->
-        <section id="about">
+        <section id="about" class="about-section">
             <div class="container">
                 <div class="about-content">
                     <div class="about-text">
-                        <h2>About Me</h2>
+                        <div class="section-label">About Me</div>
+                        <h2 class="section-title">Who I Am</h2>
                         <p>
-                            I'm currently pursuing my degree in Computer Science at New Era University, 
-                            where I'm developing a strong foundation in programming, data structures, 
+                            I'm currently pursuing my degree in Computer Science at New Era University,
+                            where I'm developing a strong foundation in programming, data structures,
                             and software engineering principles.
                         </p>
                         <p>
-                            My passion lies in data engineering - the art of designing and building 
-                            systems that collect, store, and analyze data at scale. I'm constantly 
-                            learning new technologies and methodologies to stay at the forefront of 
+                            My passion lies in data engineering — the art of designing and building
+                            systems that collect, store, and analyze data at scale. I'm constantly
+                            learning new technologies and methodologies to stay at the forefront of
                             this rapidly evolving field.
                         </p>
-                        
                         <div class="skills-grid">
                             <div class="skill-item">
-                                <h3>💻 Programming</h3>
-                                <p>Python, Java, JavaScript, SQL</p>
+                                <span class="skill-icon">💻</span>
+                                <div>
+                                    <h3>Programming</h3>
+                                    <p>Python, Java, JavaScript, SQL</p>
+                                </div>
                             </div>
                             <div class="skill-item">
-                                <h3>📊 Data Tools</h3>
-                                <p>Pandas, NumPy, Data Pipelines</p>
+                                <span class="skill-icon">📊</span>
+                                <div>
+                                    <h3>Data Tools</h3>
+                                    <p>Pandas, NumPy, Data Pipelines</p>
+                                </div>
                             </div>
                             <div class="skill-item">
-                                <h3>🗄️ Databases</h3>
-                                <p>PostgreSQL, MySQL, MongoDB</p>
+                                <span class="skill-icon">🗄️</span>
+                                <div>
+                                    <h3>Databases</h3>
+                                    <p>PostgreSQL, MySQL, MongoDB</p>
+                                </div>
                             </div>
                             <div class="skill-item">
-                                <h3>🌐 Web Dev</h3>
-                                <p>HTML, CSS, React, Node.js</p>
+                                <span class="skill-icon">🌐</span>
+                                <div>
+                                    <h3>Web Dev</h3>
+                                    <p>HTML, CSS, React, Node.js</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="about-image">
                         <div class="profile-card">
-                            <div class="profile-img">
-                                <img src="../assets/profile.jpeg" alt="Profile Image">
+                            <div class="profile-img-ring">
+                                <div class="profile-img">
+                                    <img src="assets/profile.jpeg" alt="Peja Lattrell Escares">
+                                </div>
                             </div>
                             <h3>Peja Lattrell Escares</h3>
-                            <p>Computer Science Student</p>
-                            <p>New Era University</p>
+                            <p class="profile-role">Computer Science Student</p>
+                            <p class="profile-university">New Era University</p>
+                            <div class="profile-stats">
+                                <div class="stat">
+                                    <span class="stat-num">2+</span>
+                                    <span class="stat-label">Projects</span>
+                                </div>
+                                <div class="stat-divider"></div>
+                                <div class="stat">
+                                    <span class="stat-num">4+</span>
+                                    <span class="stat-label">Tech Skills</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -98,25 +118,24 @@
         </section>
 
         <!-- Projects Section -->
-        <section id="projects">
+        <section id="projects" class="projects-section">
             <div class="container">
-                <div class="section-header">
-                    <h2>My Projects</h2>
-                    <p>Here are some of the projects I've been working on</p>
-                </div>
-                
+                <div class="section-label">Portfolio</div>
+                <h2 class="section-title">My Projects</h2>
+                <p class="section-subtitle">Here are some of the projects I've been working on</p>
+
                 <div class="projects-grid">
                     <!-- Project 1 -->
-                    <div class="project-card">
+                    <article class="project-card" data-purpose="project-card">
                         <div class="project-image">
-                            <img src="../assets/library.png" alt="Library System">
+                            <img src="assets/library.png" alt="Library System Screenshot">
+                            <div class="project-image-overlay"></div>
                         </div>
                         <div class="project-content">
                             <h3>New Era University Library System</h3>
                             <p>
-                                Built a library system for New Era University that allows users to 
-                                borrow and return books. It also includes a system for 
-                                managing book records and user information.
+                                A robust management platform for university libraries, streamlining
+                                book borrowing, returns, and inventory tracking with a focus on user experience.
                             </p>
                             <div class="project-tags">
                                 <span class="tag">React JS</span>
@@ -124,51 +143,97 @@
                                 <span class="tag">Firebase</span>
                             </div>
                             <div class="project-links">
-                                <a href="https://neu-library-monitoring-system.web.app/" class="project-link link-primary">View Project</a>
-                                <a href="https://github.com/PejaLattrell/NEU-Library-System" class="project-link link-secondary">GitHub</a>
+                                <a href="https://neu-library-monitoring-system.web.app/" class="project-link link-primary" target="_blank" rel="noopener">View Project</a>
+                                <a href="https://github.com/PejaLattrell/NEU-Library-System" class="project-link link-secondary" target="_blank" rel="noopener">GitHub</a>
                             </div>
                         </div>
-                    </div>
+                    </article>
 
                     <!-- Project 2 -->
-                    <div class="project-card">
-                        <div class="project-image">🌐</div>
+                    <article class="project-card" data-purpose="project-card">
+                        <div class="project-image">
+                            <img src="assets/images/Screenshot 2026-06-09 150447.png" alt="NEUvigate Lost & Found Board">
+                            <div class="project-image-overlay"></div>
+                        </div>
                         <div class="project-content">
-                            <h3>University Portal</h3>
+                            <h3>NEUvigate — Campus Lost &amp; Found</h3>
                             <p>
-                                Developed a web-based student portal for managing courses, 
-                                grades, and academic resources with a modern, responsive interface.
+                                A real-time campus lost and found board that allows students and staff
+                                to report, search, and track lost or recovered items across university facilities.
                             </p>
                             <div class="project-tags">
-                                <span class="tag">JavaScript</span>
-                                <span class="tag">React</span>
-                                <span class="tag">Node.js</span>
+                                <span class="tag">Next.js</span>
+                                <span class="tag">Supabase</span>
+                                <span class="tag">Vercel</span>
                             </div>
                             <div class="project-links">
-                                <a href="#" class="project-link link-primary">View Project</a>
-                                <a href="#" class="project-link link-secondary">GitHub</a>
+                                <a href="https://navibyte-lfk.vercel.app/board" class="project-link link-primary" target="_blank" rel="noopener">View Project</a>
+                                <a href="https://github.com/solanov/navibyte-lostnfoundkb" class="project-link link-secondary" target="_blank" rel="noopener">GitHub</a>
                             </div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="skills-section">
+            <div class="container">
+                <div class="section-label">Expertise</div>
+                <h2 class="section-title">Skills</h2>
+                <p class="section-subtitle">Technologies and tools I work with</p>
+
+                <div class="skills-cards-grid">
+                    <!-- Skill 1 -->
+                    <div class="glass-card skill-card skill-card--purple">
+                        <div class="skill-card-icon skill-card-icon--purple">
+                            <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div class="skill-card-body">
+                            <h4>Data Engineering</h4>
+                            <p>Python, SQL, Spark, Airflow, Hadoop, ETL Pipelines</p>
                         </div>
                     </div>
 
-                    <!-- Project 3 -->
-                    <div class="project-card">
-                        <div class="project-image">📈</div>
-                        <div class="project-content">
-                            <h3>Analytics Dashboard</h3>
-                            <p>
-                                Created an interactive analytics dashboard for visualizing 
-                                complex datasets with real-time updates and custom filters.
-                            </p>
-                            <div class="project-tags">
-                                <span class="tag">Python</span>
-                                <span class="tag">Flask</span>
-                                <span class="tag">Chart.js</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="#" class="project-link link-primary">View Project</a>
-                                <a href="#" class="project-link link-secondary">GitHub</a>
-                            </div>
+                    <!-- Skill 2 -->
+                    <div class="glass-card skill-card skill-card--teal">
+                        <div class="skill-card-icon skill-card-icon--teal">
+                            <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div class="skill-card-body">
+                            <h4>Web Development</h4>
+                            <p>HTML5, CSS3, React, Node.js, TypeScript</p>
+                        </div>
+                    </div>
+
+                    <!-- Skill 3 -->
+                    <div class="glass-card skill-card skill-card--blue">
+                        <div class="skill-card-icon skill-card-icon--blue">
+                            <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div class="skill-card-body">
+                            <h4>Tools &amp; Technologies</h4>
+                            <p>Git, Docker, AWS, Linux, Terraform, CI/CD</p>
+                        </div>
+                    </div>
+
+                    <!-- Skill 4 -->
+                    <div class="glass-card skill-card skill-card--pink">
+                        <div class="skill-card-icon skill-card-icon--pink">
+                            <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div class="skill-card-body">
+                            <h4>Machine Learning</h4>
+                            <p>TensorFlow, Scikit-learn, Pandas, NumPy, Keras</p>
                         </div>
                     </div>
                 </div>
@@ -176,61 +241,71 @@
         </section>
 
         <!-- Contact Section -->
-        <section id="contact">
+        <section id="contact" class="contact-section">
             <div class="container">
-                <div class="contact-content">
-                    <div class="section-header">
-                        <h2>Get In Touch</h2>
-                        <p>Feel free to reach out for collaborations or just a friendly chat</p>
+                <div class="section-label">Let's Talk</div>
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-subtitle">Feel free to reach out for collaborations or just a friendly chat</p>
+
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">📧</div>
+                            <div class="contact-details">
+                                <h3>Email</h3>
+                                <p><a href="mailto:lattrellp@gmail.com">lattrellp@gmail.com</a></p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">📱</div>
+                            <div class="contact-details">
+                                <h3>Phone</h3>
+                                <p>+63 977 420 4828</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div class="contact-details">
+                                <h3>Location</h3>
+                                <p>Quezon City, Philippines</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-socials">
+                            <a href="https://github.com/PejaLattrell" class="social-link" aria-label="GitHub" target="_blank" rel="noopener">
+                                <img src="assets/images/github-mark.png" alt="GitHub">
+                            </a>
+                            <a href="https://linkedin.com/in/peja-lattrell-escares-779392341" class="social-link" aria-label="LinkedIn" target="_blank" rel="noopener">
+                                <img src="assets/svg/linkedin-svgrepo-com.svg" alt="LinkedIn">
+                            </a>
+                            <a href="https://x.com/luttrhill" class="social-link" aria-label="Twitter" target="_blank" rel="noopener">
+                                <img src="assets/svg/twitter-svgrepo-com.svg" alt="Twitter">
+                            </a>
+                            <a href="mailto:lattrellp@gmail.com" class="social-link" aria-label="Email">✉️</a>
+                        </div>
                     </div>
-                    
-                    <div class="contact-grid">
-                        <div class="contact-info">
-                            <div class="contact-item">
-                                <div class="contact-icon">📧</div>
-                                <div class="contact-details">
-                                    <h3>Email</h3>
-                                    <p><a href="mailto:peja.escares@example.com">lattrellp@gmail.com</a></p>
-                                </div>
+
+                    <div class="contact-form-wrapper">
+                        <form id="contactForm" class="contact-form">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" name="name" placeholder="Your Name" required>
                             </div>
-                            
-                            <div class="contact-item">
-                                <div class="contact-icon">📱</div>
-                                <div class="contact-details">
-                                    <h3>Phone</h3>
-                                    <p>+63 977 420 4828</p>
-                                </div>
+
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
                             </div>
-                            
-                            <div class="contact-item">
-                                <div class="contact-icon">📍</div>
-                                <div class="contact-details">
-                                    <h3>Location</h3>
-                                    <p>Quezon City, Philippines</p>
-                                </div>
+
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" placeholder="Your message here..." required></textarea>
                             </div>
-                        </div>
-                        
-                        <div class="contact-form">
-                            <form id="contactForm">
-                                <div class="form-group">
-                                    <label for="name">Name</label>
-                                    <input type="text" id="name" name="name" placeholder="Your Name" required>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="message">Message</label>
-                                    <textarea id="message" name="message" placeholder="Your message here..." required></textarea>
-                                </div>
-                                
-                                <button type="submit" class="btn btn-primary">Send Message</button>
-                            </form>
-                        </div>
+
+                            <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -239,19 +314,24 @@
 
     <!-- Footer -->
     <footer>
-        <div class="social-links">
-           <a href="https://github.com/PejaLattrell" class="social-link" aria-label="GitHub">
-                <img src="../assets/images/github-mark.png" alt="GitHub">
-            </a>
-            <a href="https://linkedin.com/in/peja-lattrell-escares-779392341" class="social-link" aria-label="LinkedIn">
-                <img src="../assets/svg/linkedin-svgrepo-com.svg" alt="LinkedIn">
-            </a>
-            <a href="https://x.com/luttrhill" class="social-link" aria-label="Twitter">
-                <img src="../assets/svg/twitter-svgrepo-com.svg" alt="Twitter">
-            </a>
-            <a href="mailto:lattrellp@gmail.com" class="social-link" aria-label="Email">✉️</a>
+        <div class="footer-inner">
+            <div class="footer-left">
+                <span class="footer-brand">Peja Lattrell Escares</span>
+                <p>&copy; 2025 Peja Lattrell Escares. All rights reserved.</p>
+            </div>
+            <div class="footer-links">
+                <a href="https://github.com/PejaLattrell" class="footer-social" aria-label="GitHub" target="_blank" rel="noopener">
+                    <img src="assets/images/github-mark.png" alt="GitHub">
+                </a>
+                <a href="https://linkedin.com/in/peja-lattrell-escares-779392341" class="footer-social" aria-label="LinkedIn" target="_blank" rel="noopener">
+                    <img src="assets/svg/linkedin-svgrepo-com.svg" alt="LinkedIn">
+                </a>
+                <a href="https://x.com/luttrhill" class="footer-social" aria-label="Twitter" target="_blank" rel="noopener">
+                    <img src="assets/svg/twitter-svgrepo-com.svg" alt="Twitter">
+                </a>
+                <a href="mailto:lattrellp@gmail.com" class="footer-social" aria-label="Email">✉️</a>
+            </div>
         </div>
-        <p>&copy; 2025 Peja Lattrell Escares. All rights reserved.</p>
     </footer>
 
     <script src="main.js"></script>
