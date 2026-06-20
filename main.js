@@ -98,6 +98,356 @@ window.addEventListener('load', () => {
         const original = badge.textContent.trim();
         typeWriter(badge, original, 45);
     }
+    
+    // Initialize terminal emulator
+    initTerminal();
+
+    // Initialize alternating typewriter text
+    initAlternatingTypewriter();
+
+    // Initialize projects detail modal overlay
+    initProjectsModal();
 });
+
+// ============================================================
+// INTERACTIVE CLI TERMINAL
+// ============================================================
+
+function initTerminal() {
+    const terminalInput = document.getElementById('terminalInput');
+    const terminalOutput = document.getElementById('terminalOutput');
+    const terminalBody = document.getElementById('terminalBody');
+    const terminalWindow = document.querySelector('.terminal-window');
+
+    if (!terminalInput || !terminalOutput || !terminalBody || !terminalWindow) return;
+
+    let history = [];
+    let historyIndex = -1;
+
+    // Focus input on terminal click
+    terminalWindow.addEventListener('click', () => {
+        terminalInput.focus();
+    });
+
+    // Write a line to the terminal output
+    function writeLine(htmlContent, cssClass = '') {
+        const line = document.createElement('div');
+        line.className = `terminal-line ${cssClass}`;
+        line.innerHTML = htmlContent;
+        terminalOutput.appendChild(line);
+        terminalBody.scrollTop = terminalBody.scrollHeight;
+    }
+
+    // Scroll helper
+    function handleRedirect(sectionId) {
+        const target = document.getElementById(sectionId);
+        if (target) {
+            writeLine(`<span class="term-green">Redirecting to ${sectionId}...</span>`);
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            return true;
+        }
+        return false;
+    }
+
+    // Process terminal command
+    function processCommand(cmdText) {
+        const trimmed = cmdText.trim();
+        const args = trimmed.split(/\s+/);
+        const command = args[0].toLowerCase();
+
+        if (trimmed === '') {
+            writeLine('');
+            return;
+        }
+
+        // Add to history
+        history.push(cmdText);
+        historyIndex = history.length;
+
+        // Echo the entered command
+        writeLine(`<span class="terminal-prompt">visitor@pejalattrell:~$</span> <span class="term-bold">${cmdText}</span>`);
+
+        switch (command) {
+            case 'help':
+                writeLine('Available commands:', 'term-bold');
+                writeLine('  <span class="term-cyan">about</span>                     - Introduction & scroll to About');
+                writeLine('  <span class="term-cyan">skills</span>                    - Technical skillset & scroll to Skills');
+                writeLine('  <span class="term-cyan">projects</span>                  - Development work & scroll to Projects');
+                writeLine('  <span class="term-cyan">contact</span>                   - Contact info & scroll to Contact');
+                writeLine('  <span class="term-cyan">show [section]</span>            - Navigate to section (e.g. show projects)');
+                writeLine('  <span class="term-cyan">peja show [section]</span>       - Navigate to section (e.g. peja show projects)');
+                writeLine('  <span class="term-cyan">neofetch</span>                  - System information display');
+                writeLine('  <span class="term-cyan">clear</span>                     - Clear the terminal screen');
+                break;
+
+            case 'about':
+                writeLine('<span class="term-purple term-bold">Peja Lattrell Escares</span>');
+                writeLine('<span class="term-gray">--------------------</span>');
+                writeLine('Computer Science Student at New Era University & Aspiring Data Engineer.');
+                writeLine('Dedicated to mastering data structures, backend engineering, ETL pipelines,');
+                writeLine('and building scalable data solutions that transform raw data into insights.');
+                handleRedirect('about');
+                break;
+
+            case 'skills':
+                writeLine('<span class="term-yellow term-bold">Technical Skills & Expertise:</span>');
+                writeLine('  - <span class="term-green">Programming</span> : Python, Java, JavaScript, SQL');
+                writeLine('  - <span class="term-green">Data Tools</span>  : Pandas, NumPy, Data Pipelines, ETL');
+                writeLine('  - <span class="term-green">Databases</span>   : PostgreSQL, MySQL, MongoDB');
+                writeLine('  - <span class="term-green">Web Dev</span>     : HTML5, CSS3, React, Node.js, Next.js');
+                writeLine('  - <span class="term-green">Tools</span>       : Git, Docker, AWS, Linux, CI/CD');
+                handleRedirect('skills');
+                break;
+
+            case 'projects':
+                writeLine('<span class="term-blue term-bold">Featured Projects:</span>');
+                writeLine('  - <span class="term-cyan">NEU Library System</span>      : React JS, Node JS, Firebase');
+                writeLine('  - <span class="term-cyan">Campus Lost & Found</span>     : Next.js, Supabase, Vercel');
+                writeLine('  - <span class="term-cyan">SkyCast Weather App</span>     : React, Weather API, Vercel');
+                handleRedirect('projects');
+                break;
+
+            case 'contact':
+                writeLine('<span class="term-pink term-bold">Get in Touch:</span>');
+                writeLine('  - <span class="term-cyan">Email</span>     : <a href="mailto:lattrellp@gmail.com" class="term-cyan" style="text-decoration:underline;">lattrellp@gmail.com</a>');
+                writeLine('  - <span class="term-cyan">Phone</span>     : +63 977 420 4828');
+                writeLine('  - <span class="term-cyan">Github</span>    : <a href="https://github.com/PejaLattrell" target="_blank" class="term-cyan" style="text-decoration:underline;">github.com/PejaLattrell</a>');
+                writeLine('  - <span class="term-cyan">LinkedIn</span>  : <a href="https://linkedin.com/in/peja-lattrell-escares-779392341" target="_blank" class="term-cyan" style="text-decoration:underline;">peja-lattrell-escares</a>');
+                handleRedirect('contact');
+                break;
+
+            case 'peja':
+                if (args.length > 2 && args[1].toLowerCase() === 'show') {
+                    const targetSect = args[2].toLowerCase();
+                    if (['about', 'skills', 'projects', 'contact', 'home'].includes(targetSect)) {
+                        handleRedirect(targetSect);
+                    } else {
+                        writeLine(`<span class="term-red">Unknown section: ${args[2]}. Available: about, skills, projects, contact, home</span>`);
+                    }
+                } else {
+                    writeLine('Usage: <span class="term-cyan">peja show [about|skills|projects|contact|home]</span>');
+                }
+                break;
+
+            case 'show':
+                if (args.length > 1) {
+                    const targetSect = args[1].toLowerCase();
+                    if (['about', 'skills', 'projects', 'contact', 'home'].includes(targetSect)) {
+                        handleRedirect(targetSect);
+                    } else {
+                        writeLine(`<span class="term-red">Unknown section: ${args[1]}. Available: about, skills, projects, contact, home</span>`);
+                    }
+                } else {
+                    writeLine('Usage: <span class="term-cyan">show [about|skills|projects|contact|home]</span>');
+                }
+                break;
+
+            case 'neofetch':
+                executeNeofetch();
+                break;
+
+            case 'clear':
+                terminalOutput.innerHTML = '';
+                break;
+
+            case 'sudo':
+                if (args.length > 1 && args[1] === 'rm' && trimmed.includes('-rf')) {
+                    writeLine('<span class="term-red">[sudo] password for visitor: *********</span>');
+                    writeLine('<span class="term-yellow term-bold">WARNING: System override initiated...</span>');
+                    writeLine('Deleting root directory files... 📂');
+                    setTimeout(() => {
+                        writeLine('<span class="term-red term-bold">Error: Operation aborted. Nice try, kid! 😉</span>');
+                    }, 500);
+                } else {
+                    writeLine('<span class="term-red">Error: visitor is not in the sudoers file. This incident will be reported.</span>');
+                }
+                break;
+
+            default:
+                writeLine(`<span class="term-red">Command not found: ${command}. Type <span class="term-bold">help</span> to see available commands.</span>`);
+        }
+    }
+
+    function executeNeofetch() {
+        const ascii = [
+            '  <span class="term-purple">____  _____    _   _</span>',
+            ' <span class="term-purple">|  _ \\| ____|  | | | |</span>  <span class="term-bold term-cyan">visitor@pejalattrell</span>',
+            ' <span class="term-purple">| |_) |  _| _  | | | |</span>  --------------------',
+            ' <span class="term-purple">|  __/| |__| |_| |_| |</span>  <span class="term-green">OS</span>      : NEU OS v2.0',
+            ' <span class="term-purple">|_|   |_____\\___/___/</span>  <span class="term-green">Host</span>    : peja-portfolio',
+            '                        <span class="term-green">Kernel</span>  : Coffee & Code',
+            '                        <span class="term-green">Shell</span>   : zsh 5.8',
+            '                        <span class="term-green">Theme</span>   : Dark Glassmorphic',
+            '                        <span class="term-green">Goal</span>    : Aspiring Data Engineer',
+            '                        <span class="term-green">CPU</span>     : Student Brain @ 100%'
+        ];
+        ascii.forEach(line => writeLine(line));
+    }
+
+    // Keyboard handling
+    terminalInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            const cmd = terminalInput.value;
+            processCommand(cmd);
+            terminalInput.value = '';
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            if (historyIndex > 0) {
+                historyIndex--;
+                terminalInput.value = history[historyIndex];
+            }
+        } else if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            if (historyIndex < history.length - 1) {
+                historyIndex++;
+                terminalInput.value = history[historyIndex];
+            } else {
+                historyIndex = history.length;
+                terminalInput.value = '';
+            }
+        }
+    });
+
+    // Boot-up sequence
+    writeLine('<span class="term-gray">System diagnostic boot sequence... [OK]</span>');
+    writeLine('<span class="term-green term-bold">Welcome to Peja Lattrell Escares\' Terminal Portfolio v1.0.0</span>');
+    writeLine('Type <span class="term-cyan term-bold">help</span> to list available commands.');
+    writeLine('');
+    executeNeofetch();
+}
+
+// ============================================================
+// ALTERNATING TYPEWRITER EFFECT
+// ============================================================
+
+function initAlternatingTypewriter() {
+    const el = document.getElementById('alternatingText');
+    if (!el) return;
+
+    const words = [
+        "Full-Stack Developer",
+        "Aspiring Data Engineer",
+        "Computer Science Student"
+    ];
+    let wordIndex = 0;
+    let charIndex = words[wordIndex].length;
+    let isDeleting = true; // start deleting the default text
+
+    function type() {
+        const currentWord = words[wordIndex];
+        
+        if (isDeleting) {
+            // Remove a char
+            el.textContent = currentWord.substring(0, charIndex - 1);
+            charIndex--;
+        } else {
+            // Add a char
+            el.textContent = currentWord.substring(0, charIndex + 1);
+            charIndex++;
+        }
+
+        // Determine next state & delay
+        let delay = 100; // default typing speed
+
+        if (isDeleting) {
+            delay /= 2; // delete faster
+        }
+
+        if (!isDeleting && charIndex === currentWord.length) {
+            // Fully typed, pause before deleting
+            delay = 2000;
+            isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+            // Fully deleted, move to next word
+            isDeleting = false;
+            wordIndex = (wordIndex + 1) % words.length;
+            delay = 500; // brief pause before starting typing
+        }
+
+        setTimeout(type, delay);
+    }
+
+    // Start the loop (initially it deletes "Full-Stack Developer")
+    setTimeout(type, 1500);
+}
+
+// ============================================================
+// PROJECTS MODAL OVERLAY
+// ============================================================
+
+function initProjectsModal() {
+    const projectCards = document.querySelectorAll('.project-card');
+    const modal = document.getElementById('projectModal');
+    const modalClose = document.getElementById('modalClose');
+    const modalOverlay = modal ? modal.querySelector('.modal-overlay') : null;
+
+    const modalTitle = document.getElementById('modalTitle');
+    const modalTags = document.getElementById('modalTags');
+    const modalDescription = document.getElementById('modalDescription');
+    const modalLiveLink = document.getElementById('modalLiveLink');
+    const modalGithubLink = document.getElementById('modalGithubLink');
+
+    if (!modal || projectCards.length === 0) return;
+
+    projectCards.forEach(card => {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', (e) => {
+            // If clicked on links, open link normally
+            if (e.target.closest('.project-link')) {
+                return;
+            }
+
+            // Get project data
+            const title = card.querySelector('h3').textContent;
+            const shortDesc = card.querySelector('p').textContent;
+            const longDesc = card.getAttribute('data-details') || shortDesc;
+            const tagsHTML = card.querySelector('.project-tags').innerHTML;
+            
+            const liveBtn = card.querySelector('.link-primary');
+            const githubBtn = card.querySelector('.link-secondary');
+            
+            const liveHref = liveBtn ? liveBtn.getAttribute('href') : '';
+            const githubHref = githubBtn ? githubBtn.getAttribute('href') : '';
+
+            // Populate modal
+            modalTitle.textContent = title;
+            modalTags.innerHTML = tagsHTML;
+            modalDescription.textContent = longDesc;
+
+            if (liveHref) {
+                modalLiveLink.setAttribute('href', liveHref);
+                modalLiveLink.style.display = 'inline-flex';
+            } else {
+                modalLiveLink.style.display = 'none';
+            }
+
+            if (githubHref) {
+                modalGithubLink.setAttribute('href', githubHref);
+                modalGithubLink.style.display = 'inline-flex';
+            } else {
+                modalGithubLink.style.display = 'none';
+            }
+
+            // Show modal
+            modal.classList.add('modal-active');
+            document.body.style.overflow = 'hidden'; // prevent page scroll
+        });
+    });
+
+    function closeModal() {
+        modal.classList.remove('modal-active');
+        document.body.style.overflow = ''; // restore page scroll
+    }
+
+    if (modalClose) modalClose.addEventListener('click', closeModal);
+    if (modalOverlay) modalOverlay.addEventListener('click', closeModal);
+
+    // Close on Escape key
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('modal-active')) {
+            closeModal();
+        }
+    });
+}
 
 console.log('Portfolio website loaded successfully! 🚀');

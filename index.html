@@ -19,22 +19,37 @@
     <main>
         <!-- Hero / Home Section -->
         <section id="home" class="hero-section">
-            <div class="hero-content">
-                <div class="hero-badge">👋 Open to opportunities</div>
-                <h1 class="hero-title">
-                    Hi, I'm Peja Lattrell Escares
-                    <span class="gradient-text">
-                        Computer Science Student &amp;<br>Aspiring Data Engineer
-                    </span>
-                </h1>
-                <p class="hero-subtitle">
-                    I'm a passionate computer science student at New Era University,
-                    dedicated to mastering data engineering and building innovative solutions
-                    that transform raw data into meaningful insights.
-                </p>
-                <div class="cta-buttons">
-                    <a href="#projects" class="btn btn-primary">View My Work</a>
-                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        Hi, I'm Peja Lattrell Escares
+                        <br>
+                        <span class="gradient-text" id="alternatingText">Full-Stack Developer</span>
+                    </h1>
+                    <div class="cta-buttons">
+                        <a href="#projects" class="btn btn-primary">View My Work</a>
+                        <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                    </div>
+                </div>
+
+                <div class="hero-terminal-wrapper">
+                    <div class="terminal-window">
+                        <div class="terminal-header">
+                            <div class="terminal-buttons">
+                                <span class="terminal-btn btn-close"></span>
+                                <span class="terminal-btn btn-minimize"></span>
+                                <span class="terminal-btn btn-maximize"></span>
+                            </div>
+                            <div class="terminal-title">bash — peja@portfolio</div>
+                        </div>
+                        <div class="terminal-body" id="terminalBody">
+                            <div class="terminal-output" id="terminalOutput"></div>
+                            <div class="terminal-input-line">
+                                <span class="terminal-prompt">visitor@pejalattrell:~$</span>
+                                <input type="text" id="terminalInput" class="terminal-input-field" autocomplete="off" spellcheck="false" aria-label="Terminal input">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="hero-glow"></div>
@@ -48,15 +63,12 @@
                         <div class="section-label">About Me</div>
                         <h2 class="section-title">Who I Am</h2>
                         <p>
-                            I'm currently pursuing my degree in Computer Science at New Era University,
-                            where I'm developing a strong foundation in programming, data structures,
-                            and software engineering principles.
+                            I'm a Full-stack developer and aspiring data engineer with a strong foundation in programming,
+                            data structures, and software engineering principles. 
                         </p>
                         <p>
-                            My passion lies in data engineering — the art of designing and building
-                            systems that collect, store, and analyze data at scale. I'm constantly
-                            learning new technologies and methodologies to stay at the forefront of
-                            this rapidly evolving field.
+                           My focus is on designing and building scalable systems for data collection, storage,
+                           and analysis, with a growing interest in data pipelines and data-driven solutions.
                         </p>
                         <div class="skills-grid">
                             <div class="skill-item">
@@ -126,7 +138,7 @@
 
                 <div class="projects-grid">
                     <!-- Project 1 -->
-                    <article class="project-card" data-purpose="project-card">
+                    <article class="project-card" data-purpose="project-card" data-details="Designed and developed a comprehensive Library Management System for New Era University. The system streamlines book inventory, automated checkouts, return tracking, and student account monitoring. Key features include active search cataloging, automated return reminders, and custom dashboard access controls for librarians.">
                         <div class="project-image">
                             <img src="assets/library.png" alt="Library System Screenshot">
                             <div class="project-image-overlay"></div>
@@ -143,14 +155,14 @@
                                 <span class="tag">Firebase</span>
                             </div>
                             <div class="project-links">
-                                <a href="https://neu-library-monitoring-system.web.app/" class="project-link link-primary" target="_blank" rel="noopener">View Project</a>
+                                <a href="https://neu-library-monitoring-system.web.app/" class="project-link link-primary" target="_blank" rel="noopener">View</a>
                                 <a href="https://github.com/PejaLattrell/NEU-Library-System" class="project-link link-secondary" target="_blank" rel="noopener">GitHub</a>
                             </div>
                         </div>
                     </article>
 
                     <!-- Project 2 -->
-                    <article class="project-card" data-purpose="project-card">
+                    <article class="project-card" data-purpose="project-card" data-details="NEUvigate is a campus-wide real-time Lost & Found board. It enables students and university staff to report lost items with detailed location tags, search logs using keywords, and update status when an item is recovered. Powered by Supabase for real-time subscription notifications and image storage, ensuring seamless collaboration across campus facilities.">
                         <div class="project-image">
                             <img src="assets/images/Screenshot 2026-06-09 150447.png" alt="NEUvigate Lost & Found Board">
                             <div class="project-image-overlay"></div>
@@ -167,14 +179,14 @@
                                 <span class="tag">Vercel</span>
                             </div>
                             <div class="project-links">
-                                <a href="https://navibyte-lfk.vercel.app/board" class="project-link link-primary" target="_blank" rel="noopener">View Project</a>
+                                <a href="https://navibyte-lfk.vercel.app/board" class="project-link link-primary" target="_blank" rel="noopener">View</a>
                                 <a href="https://github.com/solanov/navibyte-lostnfoundkb" class="project-link link-secondary" target="_blank" rel="noopener">GitHub</a>
                             </div>
                         </div>
                     </article>
 
                     <!-- Project 3 -->
-                    <article class="project-card" data-purpose="project-card">
+                    <article class="project-card" data-purpose="project-card" data-details="SkyCast is a high-performance weather web application. It integrates with major OpenWeather APIs to deliver real-time meteorological data, 7-day extended forecasts, local atmospheric metrics, and maps. The interface features dynamic animations and backgrounds that transition in real-time according to weather conditions.">
                         <div class="project-image">
                             <img src="assets/images/Skycast.png" alt="SkyCast Weather App">
                             <div class="project-image-overlay"></div>
@@ -191,7 +203,7 @@
                                 <span class="tag">Vercel</span>
                             </div>
                             <div class="project-links">
-                                <a href="https://sky-cast-three-inky.vercel.app/" class="project-link link-primary" target="_blank" rel="noopener">View Project</a>
+                                <a href="https://sky-cast-three-inky.vercel.app/" class="project-link link-primary" target="_blank" rel="noopener">View</a>
                                 <a href="https://github.com/PejaLattrell/SkyCast" class="project-link link-secondary" target="_blank" rel="noopener">GitHub</a>
                             </div>
                         </div>
@@ -357,6 +369,25 @@
             </div>
         </div>
     </footer>
+
+    <!-- Project Details Modal -->
+    <div id="projectModal" class="project-modal" aria-hidden="true">
+        <div class="modal-overlay"></div>
+        <div class="modal-content glass-card">
+            <button class="modal-close" id="modalClose" aria-label="Close modal">&times;</button>
+            <div class="modal-body">
+                <div class="modal-details-wrapper">
+                    <h3 id="modalTitle" class="modal-title"></h3>
+                    <div class="modal-tags" id="modalTags"></div>
+                    <p id="modalDescription" class="modal-description"></p>
+                    <div class="modal-actions">
+                        <a id="modalLiveLink" href="" class="btn btn-primary" target="_blank" rel="noopener">View Live Project</a>
+                        <a id="modalGithubLink" href="" class="btn btn-secondary" target="_blank" rel="noopener">GitHub Repo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="main.js"></script>
 </body>
