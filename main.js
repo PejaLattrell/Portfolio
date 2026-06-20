@@ -326,8 +326,7 @@ function initAlternatingTypewriter() {
 
     const words = [
         "Full-Stack Developer",
-        "Aspiring Data Engineer",
-        "Computer Science Student"
+        "Data Engineer"
     ];
     let wordIndex = 0;
     let charIndex = words[wordIndex].length;
