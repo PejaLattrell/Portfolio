@@ -204,6 +204,7 @@ function initTerminal() {
                 writeLine('  - <span class="term-cyan">NEU Library System</span>      : React JS, Node JS, Firebase');
                 writeLine('  - <span class="term-cyan">Campus Lost & Found</span>     : Next.js, Supabase, Vercel');
                 writeLine('  - <span class="term-cyan">SkyCast Weather App</span>     : React, Weather API, Vercel');
+                writeLine('  - <span class="term-cyan">NEU MOA Monitoring</span>      : React JS, Firebase, Node JS');
                 handleRedirect('projects');
                 break;
 
