@@ -16,6 +16,11 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 
 // ============================================================
+// EMAILJS INIT
+// ============================================================
+emailjs.init('ouAQx49DFQpgk_Dz6');
+
+// ============================================================
 // CONTACT FORM
 // ============================================================
 const contactForm = document.getElementById('contactForm');
@@ -23,8 +28,27 @@ const contactForm = document.getElementById('contactForm');
 if (contactForm) {
     contactForm.addEventListener('submit', function (e) {
         e.preventDefault();
-        showNotification("Message sent successfully! I'll get back to you soon.", 'success');
-        contactForm.reset();
+
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+
+        // Loading state
+        submitBtn.textContent = 'Sending...';
+        submitBtn.disabled = true;
+
+        emailjs.sendForm('service_fdzbmqo', 'template_32vwhmg', contactForm)
+            .then(() => {
+                showNotification("Message sent successfully! I'll get back to you soon.", 'success');
+                contactForm.reset();
+            })
+            .catch((error) => {
+                console.error('EmailJS error:', error);
+                showNotification('Oops! Something went wrong. Please try again.', 'error');
+            })
+            .finally(() => {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            });
     });
 }
 
@@ -107,7 +131,105 @@ window.addEventListener('load', () => {
 
     // Initialize projects detail modal overlay
     initProjectsModal();
+
+    // Make terminal draggable within the hero section
+    initDraggableTerminal();
 });
+
+// ============================================================
+// DRAGGABLE TERMINAL
+// ============================================================
+
+function initDraggableTerminal() {
+    const terminal = document.querySelector('.terminal-window');
+    const handle   = document.querySelector('.terminal-header');
+    const hero     = document.getElementById('home');
+
+    if (!terminal || !handle || !hero) return;
+
+    let isDragging = false;
+    let startX = 0, startY = 0;
+    let currentX = 0, currentY = 0;
+
+    handle.style.cursor = 'grab';
+
+    function clamp(val, min, max) {
+        return Math.max(min, Math.min(max, val));
+    }
+
+    function getClampedPos(rawX, rawY) {
+        const heroRect = hero.getBoundingClientRect();
+        const termRect = terminal.getBoundingClientRect();
+
+        // Natural (untransformed) edges
+        const natLeft   = termRect.left   - currentX;
+        const natRight  = termRect.right  - currentX;
+        const natTop    = termRect.top    - currentY;
+        const natBottom = termRect.bottom - currentY;
+
+        const minX = heroRect.left   - natLeft;
+        const maxX = heroRect.right  - natRight;
+        const minY = heroRect.top    - natTop;
+        const maxY = heroRect.bottom - natBottom;
+
+        return {
+            x: clamp(rawX, minX, maxX),
+            y: clamp(rawY, minY, maxY)
+        };
+    }
+
+    // ── Mouse events ──────────────────────────────────────────
+    handle.addEventListener('mousedown', (e) => {
+        if (e.target.closest('.terminal-buttons')) return; // don't drag on close/min/max
+        isDragging = true;
+        startX = e.clientX - currentX;
+        startY = e.clientY - currentY;
+        handle.style.cursor = 'grabbing';
+        terminal.style.transition = 'none';
+        terminal.style.willChange = 'transform';
+        e.preventDefault();
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        const pos = getClampedPos(e.clientX - startX, e.clientY - startY);
+        currentX = pos.x;
+        currentY = pos.y;
+        terminal.style.transform = `translate(${currentX}px, ${currentY}px)`;
+    });
+
+    document.addEventListener('mouseup', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        handle.style.cursor = 'grab';
+        terminal.style.willChange = 'auto';
+    });
+
+    // ── Touch events (mobile) ─────────────────────────────────
+    handle.addEventListener('touchstart', (e) => {
+        if (e.target.closest('.terminal-buttons')) return;
+        const touch = e.touches[0];
+        isDragging = true;
+        startX = touch.clientX - currentX;
+        startY = touch.clientY - currentY;
+        terminal.style.transition = 'none';
+        e.preventDefault();
+    }, { passive: false });
+
+    document.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        const touch = e.touches[0];
+        const pos = getClampedPos(touch.clientX - startX, touch.clientY - startY);
+        currentX = pos.x;
+        currentY = pos.y;
+        terminal.style.transform = `translate(${currentX}px, ${currentY}px)`;
+        e.preventDefault();
+    }, { passive: false });
+
+    document.addEventListener('touchend', () => {
+        isDragging = false;
+    });
+}
 
 // ============================================================
 // INTERACTIVE CLI TERMINAL
@@ -270,19 +392,28 @@ function initTerminal() {
     }
 
     function executeNeofetch() {
-        const ascii = [
-            '  <span class="term-purple">____  _____    _   _</span>',
-            ' <span class="term-purple">|  _ \\| ____|  | | | |</span>  <span class="term-bold term-cyan">visitor@pejalattrell</span>',
-            ' <span class="term-purple">| |_) |  _| _  | | | |</span>  --------------------',
-            ' <span class="term-purple">|  __/| |__| |_| |_| |</span>  <span class="term-green">OS</span>      : NEU OS v2.0',
-            ' <span class="term-purple">|_|   |_____\\___/___/</span>  <span class="term-green">Host</span>    : peja-portfolio',
-            '                        <span class="term-green">Kernel</span>  : Coffee & Code',
-            '                        <span class="term-green">Shell</span>   : zsh 5.8',
-            '                        <span class="term-green">Theme</span>   : Dark Glassmorphic',
-            '                        <span class="term-green">Goal</span>    : Aspiring Data Engineer',
-            '                        <span class="term-green">CPU</span>     : Student Brain @ 100%'
+        const art = [
+            '<span class="term-purple"> ____         _       </span>',
+            '<span class="term-purple">   / __ \\___    (_)___ _ </span>',
+            '<span class="term-purple">  / /_/ / _ \\  / / __ `/ </span>',
+            '<span class="term-purple"> / ____/  __/_/ / /_/ /  </span>',
+            '<span class="term-purple">/_/    \\___/__/ \\__,_/   </span>',
+            '<span class="term-purple">           /___/          </span>',
         ];
-        ascii.forEach(line => writeLine(line));
+        const info = [
+            '<span class="term-bold term-cyan">visitor@pejalattrell</span>',
+            '--------------------',
+            '<span class="term-green">OS</span>      : NOS v2.0',
+            '<span class="term-green">Host</span>    : Peja Lattrell',
+            '<span class="term-green">Kernel</span>  : Coffee & Code',
+            '<span class="term-green">Shell</span>   : zsh 5.8',
+            '<span class="term-green">Theme</span>   : Dark Glassmorphic',
+            '<span class="term-green">Goal</span>    : AI/ML Engineer',
+            '<span class="term-green">CPU</span>     : Intel Core i99',
+        ];
+        art.forEach(line => writeLine(line));
+        writeLine('');
+        info.forEach(line => writeLine(line));
     }
 
     // Keyboard handling
@@ -309,12 +440,30 @@ function initTerminal() {
         }
     });
 
-    // Boot-up sequence
-    writeLine('<span class="term-gray">System diagnostic boot sequence... [OK]</span>');
-    writeLine('<span class="term-green term-bold">Welcome to Peja Lattrell Escares\' Terminal Portfolio v1.0.0</span>');
-    writeLine('Type <span class="term-cyan term-bold">help</span> to list available commands.');
-    writeLine('');
-    executeNeofetch();
+    // Animated boot-up sequence
+    const bootSteps = [
+        { text: '<span class="term-gray">─────────────────────────────────────────</span>',                                 delay: 0    },
+        { text: '<span class="term-gray">[ .... ] Booting terminal environment...</span>',                                  delay: 250  },
+        { text: '<span class="term-gray">[ .... ] Loading core modules...</span>',                                           delay: 800  },
+        { text: '<span class="term-gray">[ <span class="term-green">OK</span>   ] <span class="term-green">core</span> v1.0.0 — installed</span>',                    delay: 1350 },
+        { text: '<span class="term-gray">[ .... ] Fetching portfolio data...</span>',                                        delay: 1800 },
+        { text: '<span class="term-gray">[ <span class="term-green">OK</span>   ] <span class="term-green">projects</span> v4.2.1 — installed</span>',                delay: 2300 },
+        { text: '<span class="term-gray">[ <span class="term-green">OK</span>   ] <span class="term-green">skills</span> v3.1.0 — installed</span>',                  delay: 2650 },
+        { text: '<span class="term-gray">[ <span class="term-green">OK</span>   ] <span class="term-green">contact</span> v2.0.5 — installed</span>',                 delay: 3000 },
+        { text: '<span class="term-gray">[ .... ] Initializing shell interface...</span>',                                   delay: 3450 },
+        { text: '<span class="term-gray">[ <span class="term-green">OK</span>   ] <span class="term-green">shell</span> ready</span>',                                delay: 4100 },
+        { text: '<span class="term-gray">─────────────────────────────────────────</span>',                                 delay: 4350 },
+        { text: '',                                                                                                          delay: 4450 },
+        { text: '<span class="term-green term-bold">Welcome to Peja Lattrell Escares\' Terminal Portfolio v1.0.0</span>',   delay: 4600 },
+        { text: 'Type <span class="term-cyan term-bold">help</span> to list available commands.',                            delay: 4800 },
+        { text: '',                                                                                                          delay: 4950 },
+    ];
+
+    bootSteps.forEach(({ text, delay }) => {
+        setTimeout(() => writeLine(text), delay);
+    });
+
+    setTimeout(() => executeNeofetch(), 5100);
 }
 
 // ============================================================
