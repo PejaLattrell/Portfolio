@@ -332,7 +332,7 @@ function initTerminal() {
 
             case 'contact':
                 writeLine('<span class="term-pink term-bold">Get in Touch:</span>');
-                writeLine('  - <span class="term-cyan">Email</span>     : <a href="mailto:lattrellp@gmail.com" class="term-cyan" style="text-decoration:underline;">lattrellp@gmail.com</a>');
+                writeLine('  - <span class="term-cyan">Email</span>     : <a href="mailto:contact@pejalattrell.online" class="term-cyan" style="text-decoration:underline;">contact@pejalattrell.online</a>');
                 writeLine('  - <span class="term-cyan">Phone</span>     : +63 977 420 4828');
                 writeLine('  - <span class="term-cyan">Github</span>    : <a href="https://github.com/PejaLattrell" target="_blank" class="term-cyan" style="text-decoration:underline;">github.com/PejaLattrell</a>');
                 writeLine('  - <span class="term-cyan">LinkedIn</span>  : <a href="https://linkedin.com/in/peja-lattrell-escares-779392341" target="_blank" class="term-cyan" style="text-decoration:underline;">peja-lattrell-escares</a>');
