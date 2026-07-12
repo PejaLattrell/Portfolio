@@ -272,6 +272,7 @@ function initTerminal() {
     }
 
     // Process terminal command
+    // Process terminal command
     function processCommand(cmdText) {
         const trimmed = cmdText.trim();
         const args = trimmed.split(/\s+/);
@@ -289,136 +290,176 @@ function initTerminal() {
         // Echo the entered command
         writeLine(`<span class="terminal-prompt">visitor@pejalattrell:~$</span> <span class="term-bold">${cmdText}</span>`);
 
-        switch (command) {
-            case 'help':
-                writeLine('Available commands:', 'term-bold');
-                writeLine('  <span class="term-cyan">about</span>                     - Introduction & scroll to About');
-                writeLine('  <span class="term-cyan">skills</span>                    - Technical skillset & scroll to Skills');
-                writeLine('  <span class="term-cyan">projects</span>                  - Development work & scroll to Projects');
-                writeLine('  <span class="term-cyan">contact</span>                   - Contact info & scroll to Contact');
-                writeLine('  <span class="term-cyan">show [section]</span>            - Navigate to section (e.g. show projects)');
-                writeLine('  <span class="term-cyan">peja show [section]</span>       - Navigate to section (e.g. peja show projects)');
-                writeLine('  <span class="term-cyan">neofetch</span>                  - System information display');
-                writeLine('  <span class="term-cyan">clear</span>                     - Clear the terminal screen');
-                break;
-
-            case 'about':
-                writeLine('<span class="term-purple term-bold">Peja Lattrell Escares</span>');
-                writeLine('<span class="term-gray">--------------------</span>');
-                writeLine('Computer Science Student at New Era University & Aspiring Data Engineer.');
-                writeLine('Dedicated to mastering data structures, backend engineering, ETL pipelines,');
-                writeLine('and building scalable data solutions that transform raw data into insights.');
-                handleRedirect('about');
-                break;
-
-            case 'skills':
-                writeLine('<span class="term-yellow term-bold">Technical Skills & Expertise:</span>');
-                writeLine('  - <span class="term-green">Programming</span> : Python, Java, JavaScript, SQL');
-                writeLine('  - <span class="term-green">Data Tools</span>  : Pandas, NumPy, Data Pipelines, ETL');
-                writeLine('  - <span class="term-green">Databases</span>   : PostgreSQL, MySQL, MongoDB');
-                writeLine('  - <span class="term-green">Web Dev</span>     : HTML5, CSS3, React, Node.js, Next.js');
-                writeLine('  - <span class="term-green">Tools</span>       : Git, Docker, AWS, Linux, CI/CD');
-                handleRedirect('skills');
-                break;
-
-            case 'projects':
-                writeLine('<span class="term-blue term-bold">Featured Projects:</span>');
-                writeLine('  - <span class="term-cyan">NEU Library System</span>      : React JS, Node JS, Firebase');
-                writeLine('  - <span class="term-cyan">Campus Lost & Found</span>     : Next.js, Supabase, Vercel');
-                writeLine('  - <span class="term-cyan">SkyCast Weather App</span>     : React, Weather API, Vercel');
-                writeLine('  - <span class="term-cyan">NEU MOA Monitoring</span>      : React JS, Firebase, Node JS');
-                handleRedirect('projects');
-                break;
-
-            case 'contact':
-                writeLine('<span class="term-pink term-bold">Get in Touch:</span>');
-                writeLine('  - <span class="term-cyan">Email</span>     : <a href="mailto:contact@pejalattrell.online" class="term-cyan" style="text-decoration:underline;">contact@pejalattrell.online</a>');
-                writeLine('  - <span class="term-cyan">Phone</span>     : +63 977 420 4828');
-                writeLine('  - <span class="term-cyan">Github</span>    : <a href="https://github.com/PejaLattrell" target="_blank" class="term-cyan" style="text-decoration:underline;">github.com/PejaLattrell</a>');
-                writeLine('  - <span class="term-cyan">LinkedIn</span>  : <a href="https://linkedin.com/in/peja-lattrell-escares-779392341" target="_blank" class="term-cyan" style="text-decoration:underline;">peja-lattrell-escares</a>');
-                handleRedirect('contact');
-                break;
-
-            case 'peja':
-                if (args.length > 2 && args[1].toLowerCase() === 'show') {
-                    const targetSect = args[2].toLowerCase();
-                    if (['about', 'skills', 'projects', 'contact', 'home'].includes(targetSect)) {
-                        handleRedirect(targetSect);
-                    } else {
-                        writeLine(`<span class="term-red">Unknown section: ${args[2]}. Available: about, skills, projects, contact, home</span>`);
-                    }
-                } else {
-                    writeLine('Usage: <span class="term-cyan">peja show [about|skills|projects|contact|home]</span>');
-                }
-                break;
-
-            case 'show':
-                if (args.length > 1) {
-                    const targetSect = args[1].toLowerCase();
-                    if (['about', 'skills', 'projects', 'contact', 'home'].includes(targetSect)) {
-                        handleRedirect(targetSect);
-                    } else {
-                        writeLine(`<span class="term-red">Unknown section: ${args[1]}. Available: about, skills, projects, contact, home</span>`);
-                    }
-                } else {
-                    writeLine('Usage: <span class="term-cyan">show [about|skills|projects|contact|home]</span>');
-                }
-                break;
-
-            case 'neofetch':
-                executeNeofetch();
-                break;
-
-            case 'clear':
-                terminalOutput.innerHTML = '';
-                break;
-
-            case 'sudo':
-                if (args.length > 1 && args[1] === 'rm' && trimmed.includes('-rf')) {
-                    writeLine('<span class="term-red">[sudo] password for visitor: *********</span>');
-                    writeLine('<span class="term-yellow term-bold">WARNING: System override initiated...</span>');
-                    writeLine('Deleting root directory files... 📂');
-                    setTimeout(() => {
-                        writeLine('<span class="term-red term-bold">Error: Operation aborted. Nice try, kid! 😉</span>');
-                    }, 500);
-                } else {
-                    writeLine('<span class="term-red">Error: visitor is not in the sudoers file. This incident will be reported.</span>');
-                }
-                break;
-
-            default:
-                writeLine(`<span class="term-red">Command not found: ${command}. Type <span class="term-bold">help</span> to see available commands.</span>`);
+        // Disable input line
+        const inputLine = document.querySelector('.terminal-input-line');
+        if (inputLine) {
+            inputLine.style.opacity = '0';
+            inputLine.style.pointerEvents = 'none';
         }
+
+        // Create loader line
+        const loaderEl = document.createElement('div');
+        loaderEl.className = 'terminal-line';
+        loaderEl.innerHTML = '<span class="term-gray">[      ] Processing...</span>';
+        terminalOutput.appendChild(loaderEl);
+        terminalBody.scrollTop = terminalBody.scrollHeight;
+
+        let dotsCount = 0;
+        const loaderInterval = setInterval(() => {
+            dotsCount = (dotsCount + 1) % 5;
+            const dots = '.'.repeat(dotsCount) + ' '.repeat(4 - dotsCount);
+            loaderEl.innerHTML = `<span class="term-gray">[ ${dots} ] Processing...</span>`;
+        }, 200);
+
+        setTimeout(() => {
+            clearInterval(loaderInterval);
+            loaderEl.remove();
+
+            switch (command) {
+                case 'help':
+                    writeLine('Available commands:', 'term-bold');
+                    writeLine('  <span class="term-cyan">about</span>                     - Introduction & scroll to About');
+                    writeLine('  <span class="term-cyan">skills</span>                    - Technical skillset & scroll to Skills');
+                    writeLine('  <span class="term-cyan">projects</span>                  - Development work & scroll to Projects');
+                    writeLine('  <span class="term-cyan">contact</span>                   - Contact info & scroll to Contact');
+                    writeLine('  <span class="term-cyan">show [section]</span>            - Navigate to section (e.g. show projects)');
+                    writeLine('  <span class="term-cyan">peja show [section]</span>       - Navigate to section (e.g. peja show projects)');
+                    writeLine('  <span class="term-cyan">neofetch</span>                  - System information display');
+                    writeLine('  <span class="term-cyan">clear</span>                     - Clear the terminal screen');
+                    break;
+
+                case 'about':
+                    writeLine('<span class="term-purple term-bold">Peja Lattrell Escares</span>');
+                    writeLine('<span class="term-gray">--------------------</span>');
+                    writeLine('Computer Science Student at New Era University & Aspiring Data Engineer.');
+                    writeLine('Dedicated to mastering data structures, backend engineering, ETL pipelines,');
+                    writeLine('and building scalable data solutions that transform raw data into insights.');
+                    handleRedirect('about');
+                    break;
+
+                case 'skills':
+                    writeLine('<span class="term-yellow term-bold">Technical Skills & Expertise:</span>');
+                    writeLine('  - <span class="term-green">Programming</span> : Python, Java, JavaScript, SQL');
+                    writeLine('  - <span class="term-green">Data Tools</span>  : Pandas, NumPy, Data Pipelines, ETL');
+                    writeLine('  - <span class="term-green">Databases</span>   : PostgreSQL, MySQL, MongoDB');
+                    writeLine('  - <span class="term-green">Web Dev</span>     : HTML5, CSS3, React, Node.js, Next.js');
+                    writeLine('  - <span class="term-green">Tools</span>       : Git, Docker, AWS, Linux, CI/CD');
+                    handleRedirect('skills');
+                    break;
+
+                case 'projects':
+                    writeLine('<span class="term-blue term-bold">Featured Projects:</span>');
+                    writeLine('  - <span class="term-cyan">NEU Library System</span>      : React JS, Node JS, Firebase');
+                    writeLine('  - <span class="term-cyan">Campus Lost & Found</span>     : Next.js, Supabase, Vercel');
+                    writeLine('  - <span class="term-cyan">SkyCast Weather App</span>     : React, Weather API, Vercel');
+                    writeLine('  - <span class="term-cyan">NEU MOA Monitoring</span>      : React JS, Firebase, Node JS');
+                    handleRedirect('projects');
+                    break;
+
+                case 'contact':
+                    writeLine('<span class="term-pink term-bold">Get in Touch:</span>');
+                    writeLine('  - <span class="term-cyan">Email</span>     : <a href="mailto:contact@pejalattrell.online" class="term-cyan" style="text-decoration:underline;">contact@pejalattrell.online</a>');
+                    writeLine('  - <span class="term-cyan">Phone</span>     : +63 977 420 4828');
+                    writeLine('  - <span class="term-cyan">Github</span>    : <a href="https://github.com/PejaLattrell" target="_blank" class="term-cyan" style="text-decoration:underline;">github.com/PejaLattrell</a>');
+                    writeLine('  - <span class="term-cyan">LinkedIn</span>  : <a href="https://linkedin.com/in/peja-lattrell-escares-779392341" target="_blank" class="term-cyan" style="text-decoration:underline;">peja-lattrell-escares</a>');
+                    handleRedirect('contact');
+                    break;
+
+                case 'peja':
+                    if (args.length > 2 && args[1].toLowerCase() === 'show') {
+                        const targetSect = args[2].toLowerCase();
+                        if (['about', 'skills', 'projects', 'contact', 'home'].includes(targetSect)) {
+                            handleRedirect(targetSect);
+                        } else {
+                            writeLine(`<span class="term-red">Unknown section: ${args[2]}. Available: about, skills, projects, contact, home</span>`);
+                        }
+                    } else {
+                        writeLine('Usage: <span class="term-cyan">peja show [about|skills|projects|contact|home]</span>');
+                    }
+                    break;
+
+                case 'show':
+                    if (args.length > 1) {
+                        const targetSect = args[1].toLowerCase();
+                        if (['about', 'skills', 'projects', 'contact', 'home'].includes(targetSect)) {
+                            handleRedirect(targetSect);
+                        } else {
+                            writeLine(`<span class="term-red">Unknown section: ${args[1]}. Available: about, skills, projects, contact, home</span>`);
+                        }
+                    } else {
+                        writeLine('Usage: <span class="term-cyan">show [about|skills|projects|contact|home]</span>');
+                    }
+                    break;
+
+                case 'neofetch':
+                    executeNeofetch();
+                    return; // executeNeofetch handles restoring the prompt itself
+
+                case 'clear':
+                    terminalOutput.innerHTML = '';
+                    break;
+
+                case 'sudo':
+                    if (args.length > 1 && args[1] === 'rm' && trimmed.includes('-rf')) {
+                        writeLine('<span class="term-red">[sudo] password for visitor: *********</span>');
+                        writeLine('<span class="term-yellow term-bold">WARNING: System override initiated...</span>');
+                        writeLine('Deleting root directory files... 📂');
+                        setTimeout(() => {
+                            writeLine('<span class="term-red term-bold">Error: Operation aborted. Nice try, kid! 😉</span>');
+                            if (inputLine) {
+                                inputLine.style.opacity = '1';
+                                inputLine.style.pointerEvents = 'auto';
+                                const terminalInput = document.getElementById('terminalInput');
+                                if (terminalInput) terminalInput.focus();
+                            }
+                        }, 500);
+                        return;
+                    } else {
+                        writeLine('<span class="term-red">Error: visitor is not in the sudoers file. This incident will be reported.</span>');
+                    }
+                    break;
+
+                default:
+                    writeLine(`<span class="term-red">Command not found: ${command}. Type <span class="term-bold">help</span> to see available commands.</span>`);
+            }
+
+            // Restore prompt
+            if (inputLine) {
+                inputLine.style.opacity = '1';
+                inputLine.style.pointerEvents = 'auto';
+                const terminalInput = document.getElementById('terminalInput');
+                if (terminalInput) terminalInput.focus();
+            }
+            terminalBody.scrollTop = terminalBody.scrollHeight;
+        }, 1500);
     }
 
     function executeNeofetch() {
         const art = [
-            '<span class="term-purple"> ____         _       </span>',
+            '<span class="term-purple">    ____          _       </span>',
             '<span class="term-purple">   / __ \\___    (_)___ _ </span>',
             '<span class="term-purple">  / /_/ / _ \\  / / __ `/ </span>',
             '<span class="term-purple"> / ____/  __/_/ / /_/ /  </span>',
             '<span class="term-purple">/_/    \\___/__/ \\__,_/   </span>',
             '<span class="term-purple">           /___/          </span>',
         ];
-        const info = [
-            '<span class="term-bold term-cyan">visitor@pejalattrell</span>',
-            '--------------------',
-            '<span class="term-green">OS</span>      : NOS v2.0',
-            '<span class="term-green">Host</span>    : Peja Lattrell',
-            '<span class="term-green">Kernel</span>  : Coffee & Code',
-            '<span class="term-green">Shell</span>   : zsh 5.8',
-            '<span class="term-green">Theme</span>   : Dark Glassmorphic',
-            '<span class="term-green">Goal</span>    : AI/ML Engineer',
-            '<span class="term-green">CPU</span>     : Intel Core i99',
-        ];
         art.forEach(line => writeLine(line));
-        writeLine('');
-        info.forEach(line => writeLine(line));
+
+        // Reveal and focus the command input line once neofetch output is complete
+        const inputLine = document.querySelector('.terminal-input-line');
+        if (inputLine) {
+            inputLine.style.opacity = '1';
+            inputLine.style.pointerEvents = 'auto';
+            const terminalInput = document.getElementById('terminalInput');
+            if (terminalInput) terminalInput.focus();
+        }
     }
 
     // Keyboard handling
     terminalInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
+            const inputLine = document.querySelector('.terminal-input-line');
+            if (inputLine && inputLine.style.opacity === '0') return; // ignore Enter while processing
             const cmd = terminalInput.value;
             processCommand(cmd);
             terminalInput.value = '';

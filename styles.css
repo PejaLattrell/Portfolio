@@ -49,7 +49,7 @@ html { scroll-behavior: smooth; }
     display: flex;
     width: max-content;
     align-items: center;
-    gap: 1rem;
+    gap: 0;
     animation: tech-marquee-ltr 28s linear infinite;
     will-change: transform;
 }
