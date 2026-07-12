@@ -475,7 +475,7 @@ function initAlternatingTypewriter() {
     if (!el) return;
 
     const words = [
-        "Full-Stack Developer",
+        "Backend Developer",
         "Data Engineer"
     ];
     let wordIndex = 0;
