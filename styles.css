@@ -10,14 +10,14 @@ html { scroll-behavior: smooth; }
 
 /* ── Text selection ── */
 ::selection {
-    background: #a855f7;
-    color: #fff;
+    background: #d4af37;
+    color: #111111;
 }
 
 /* ── Gradient text (requires -webkit-background-clip) ── */
 .gradient-text {
     display: block;
-    background: linear-gradient(135deg, #a855f7 0%, #2dd4bf 100%);
+    background: linear-gradient(135deg, #f7e7a0 0%, #d4af37 52%, #8c6f16 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -27,7 +27,7 @@ html { scroll-behavior: smooth; }
 #alternatingText {
     display: inline-block;
     padding-right: 4px;
-    border-right: 3px solid #2dd4bf;
+    border-right: 3px solid #d4af37;
     animation: blink-cursor 0.75s step-end infinite;
     width: fit-content;
 }
@@ -50,9 +50,8 @@ html { scroll-behavior: smooth; }
     width: max-content;
     align-items: center;
     gap: 1rem;
-    animation: tech-marquee-ltr 32s linear infinite;
+    animation: tech-marquee-ltr 28s linear infinite;
     will-change: transform;
-    transform: translateX(-50%);
 }
 
 .tech-marquee-group {
@@ -70,7 +69,7 @@ html { scroll-behavior: smooth; }
     padding: 0.8rem 1rem;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 999px;
-    background: rgba(15, 23, 42, 0.72);
+    background: rgba(10, 10, 10, 0.72);
     backdrop-filter: blur(14px);
     color: #e2e8f0;
     white-space: nowrap;
@@ -81,6 +80,13 @@ html { scroll-behavior: smooth; }
     font-size: 1.35rem;
     line-height: 1;
     color: #e2e8f0;
+}
+
+.tech-chip-icon {
+    width: 1.35rem;
+    height: 1.35rem;
+    object-fit: contain;
+    flex-shrink: 0;
 }
 
 .tech-chip span {
@@ -94,7 +100,7 @@ html { scroll-behavior: smooth; }
 }
 
 .tech-chip:hover {
-    border-color: rgba(45, 212, 191, 0.35);
+    border-color: rgba(212, 175, 55, 0.35);
     transform: translateY(-1px);
 }
 
@@ -106,7 +112,7 @@ html { scroll-behavior: smooth; }
     transform: translate(-50%, -50%);
     width: 600px;
     height: 600px;
-    background: radial-gradient(ellipse at center, rgba(168,85,247,0.12) 0%, transparent 70%);
+    background: radial-gradient(ellipse at center, rgba(212,175,55,0.14) 0%, transparent 70%);
     pointer-events: none;
     animation: pulse-glow 4s ease-in-out infinite;
 }
@@ -125,15 +131,15 @@ html { scroll-behavior: smooth; }
 
 /* ── Terminal color classes — used by JS writeLine() ── */
 .terminal-line   { word-break: break-all; white-space: pre-wrap; }
-.terminal-prompt { color: #2dd4bf; font-weight: 600; white-space: nowrap; }
-.term-cyan   { color: #2dd4bf; }
-.term-purple { color: #c084fc; }
-.term-yellow { color: #facc15; }
-.term-green  { color: #4ade80; }
-.term-blue   { color: #60a5fa; }
-.term-pink   { color: #f472b6; }
-.term-gray   { color: #94a3b8; }
-.term-red    { color: #f87171; }
+.terminal-prompt { color: #d4af37; font-weight: 600; white-space: nowrap; }
+.term-cyan   { color: #d4af37; }
+.term-purple { color: #f7e7a0; }
+.term-yellow { color: #d4af37; }
+.term-green  { color: #9ca37a; }
+.term-blue   { color: #e8d28a; }
+.term-pink   { color: #c9a94a; }
+.term-gray   { color: #a6a6a6; }
+.term-red    { color: #8f5b2b; }
 .term-bold   { font-weight: 700; }
 
 /* ── Project image grayscale & zoom on card hover ── */
@@ -148,10 +154,10 @@ html { scroll-behavior: smooth; }
 
 /* ── Primary button gradient (complex gradient, can't be Tailwind inline) ── */
 .btn-primary {
-    background: linear-gradient(135deg, #a855f7 0%, #3b82f6 50%, #2dd4bf 100%);
+    background: linear-gradient(135deg, #111111 0%, #3b2f0f 48%, #d4af37 100%);
     background-size: 200% auto;
     color: #fff !important;
-    box-shadow: 0 4px 20px rgba(168, 85, 247, 0.35);
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.22);
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     display: inline-flex;
     align-items: center;
@@ -163,7 +169,7 @@ html { scroll-behavior: smooth; }
 }
 .btn-primary:hover {
     background-position: right center;
-    box-shadow: 0 6px 30px rgba(168, 85, 247, 0.5);
+    box-shadow: 0 6px 30px rgba(212, 175, 55, 0.32);
     transform: translateY(-2px);
 }
 
@@ -176,7 +182,7 @@ html { scroll-behavior: smooth; }
 }
 .social-link:hover,
 .footer-social:hover {
-    background: linear-gradient(135deg, #a855f7 0%, #3b82f6 50%, #2dd4bf 100%) !important;
+    background: linear-gradient(135deg, #111111 0%, #3b2f0f 50%, #d4af37 100%) !important;
     border-color: transparent !important;
 }
 .social-link:hover img,
@@ -189,7 +195,7 @@ html { scroll-behavior: smooth; }
     position: fixed;
     top: 88px;
     right: 1.5rem;
-    background: linear-gradient(135deg, #a855f7 0%, #3b82f6 50%, #2dd4bf 100%);
+    background: linear-gradient(135deg, #111111 0%, #3b2f0f 50%, #d4af37 100%);
     color: #fff;
     padding: 0.875rem 1.5rem;
     border-radius: 12px;
@@ -221,13 +227,13 @@ html { scroll-behavior: smooth; }
     z-index: 1;
     width: 90%;
     max-width: 580px;
-    background: rgba(30, 41, 59, 0.95);
-    border: 1px solid rgba(255, 255, 255, 0.07);
+    background: rgba(17, 17, 17, 0.95);
+    border: 1px solid rgba(212, 175, 55, 0.1);
     border-radius: 24px;
     overflow: hidden;
     transform: translateY(30px) scale(0.95);
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 10px 40px rgba(0,0,0,0.4), 0 0 60px rgba(168, 85, 247, 0.15);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4), 0 0 60px rgba(212, 175, 55, 0.1);
 }
 .project-modal.modal-active .modal-content {
     transform: translateY(0) scale(1);
@@ -248,7 +254,7 @@ html { scroll-behavior: smooth; }
 }
 @keyframes blink-cursor {
     from, to { border-color: transparent; }
-    50%      { border-color: #2dd4bf; }
+    50%      { border-color: #d4af37; }
 }
 @keyframes slideInRight {
     from { transform: translateX(110%); opacity: 0; }
@@ -260,8 +266,8 @@ html { scroll-behavior: smooth; }
 }
 
 @keyframes tech-marquee-ltr {
-    from { transform: translateX(-50%); }
-    to   { transform: translateX(0); }
+    from { transform: translateX(-66.666%); }
+    to   { transform: translateX(-33.333%); }
 }
 
 /* ── Utility ── */
@@ -273,7 +279,7 @@ html { scroll-behavior: smooth; }
     }
 
     .tech-marquee-track {
-        animation-duration: 24s;
+        animation-duration: 20s;
     }
 
     .tech-chip {
@@ -283,6 +289,11 @@ html { scroll-behavior: smooth; }
 
     .tech-chip i {
         font-size: 1.15rem;
+    }
+
+    .tech-chip-icon {
+        width: 1.15rem;
+        height: 1.15rem;
     }
 
     .tech-chip span {
