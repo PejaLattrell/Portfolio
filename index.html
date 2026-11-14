@@ -201,7 +201,7 @@
                             <p class="profile-role text-sm text-gold-300 font-medium mb-0.5">Data Engineer</p>
                             <div class="profile-stats flex items-center justify-center gap-6 mt-6 pt-6 border-t border-gold-300/10">
                                 <div class="stat flex flex-col items-center gap-1">
-                                    <span class="stat-num text-2xl font-extrabold text-slate-100 leading-none">4+</span>
+                                    <span class="stat-num text-2xl font-extrabold text-slate-100 leading-none">5+</span>
                                     <span class="stat-label text-xs text-slate-500">Projects</span>
                                 </div>
                                 <div class="stat-divider w-px h-9 bg-gold-300/15"></div>
@@ -328,6 +328,33 @@
                             <div class="project-links flex gap-3">
                                 <a href="https://moa-system-9ab4c.web.app" class="project-link link-primary flex-1 inline-flex items-center justify-center h-[42px] px-4 rounded-xl text-sm font-semibold transition-all duration-300" target="_blank" rel="noopener">View</a>
                                 <a href="https://github.com/PejaLattrell/NEU-MOA-Monitoring-System" class="project-link link-secondary flex-1 inline-flex items-center justify-center h-[42px] px-4 rounded-xl text-sm font-semibold transition-all duration-300 bg-transparent text-slate-400 border border-gold-300/10 hover:bg-[#111111] hover:border-gold-300/40 hover:text-slate-100" target="_blank" rel="noopener">GitHub</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 5 -->
+                    <article class="project-card group bg-[#111111]/50 border border-gold-300/10 rounded-2xl overflow-hidden flex flex-col transition-all duration-300 shadow-[0_4px_16px_rgba(0,0,0,0.25)] hover:-translate-y-2 hover:border-gold-300/30 hover:shadow-[0_10px_40px_rgba(0,0,0,0.4),0_0_40px_rgba(212,175,55,0.1)] cursor-pointer"
+                        data-purpose="project-card"
+                        data-details="A self-hosted n8n workflow that validates and deduplicates inbound inquiries in Google Sheets, then qualifies leads with Gemini and an Ollama fallback. Hot leads receive a booking link, warm leads receive Gmail follow-ups on days 1, 3, and 7, and uncertain inquiries trigger Telegram owner alerts. Each follow-up checks reply and booking flags before sending. The core workflow has been tested with simulated providers; live integrations are still being validated.">
+                        <div class="project-image relative w-full aspect-video overflow-hidden bg-slate-800">
+                            <img src="assets/images/n8n-lead-qualification.svg" alt="n8n workflow from inbound inquiry to AI qualification, booking, follow-up, or owner review" class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105" loading="lazy" width="960" height="540">
+                            <div class="project-image-overlay absolute inset-0 bg-gradient-to-t from-slate-900/50 to-transparent pointer-events-none"></div>
+                        </div>
+                        <div class="project-content p-7 flex-1 flex flex-col">
+                            <h3 class="text-[1.2rem] font-bold text-slate-100 mb-3 tracking-tight">AI Lead Response &amp; Qualification</h3>
+                            <p class="text-sm text-slate-400 leading-relaxed flex-1 mb-5">
+                                A self-hosted n8n workflow that qualifies inbound leads with AI,
+                                sends personalized replies, and schedules follow-ups with owner alerts.
+                            </p>
+                            <div class="project-tags flex flex-wrap gap-2 mb-6">
+                                <span class="tag px-3 py-1 bg-[#111111]/80 border border-gold-300/10 rounded-full text-xs font-semibold text-slate-400 transition-all duration-300 hover:border-gold-300 hover:text-gold-300">n8n</span>
+                                <span class="tag px-3 py-1 bg-[#111111]/80 border border-gold-300/10 rounded-full text-xs font-semibold text-slate-400 transition-all duration-300 hover:border-gold-300 hover:text-gold-300">Gemini</span>
+                                <span class="tag px-3 py-1 bg-[#111111]/80 border border-gold-300/10 rounded-full text-xs font-semibold text-slate-400 transition-all duration-300 hover:border-gold-300 hover:text-gold-300">Ollama</span>
+                                <span class="tag px-3 py-1 bg-[#111111]/80 border border-gold-300/10 rounded-full text-xs font-semibold text-slate-400 transition-all duration-300 hover:border-gold-300 hover:text-gold-300">Google Sheets</span>
+                                <span class="tag px-3 py-1 bg-[#111111]/80 border border-gold-300/10 rounded-full text-xs font-semibold text-slate-400 transition-all duration-300 hover:border-gold-300 hover:text-gold-300">Docker</span>
+                            </div>
+                            <div class="project-links flex gap-3">
+                                <button type="button" class="link-primary flex-1 inline-flex items-center justify-center h-[42px] px-4 rounded-xl text-sm font-semibold transition-all duration-300 cursor-pointer" aria-haspopup="dialog" aria-controls="projectModal">View Details</button>
                             </div>
                         </div>
                     </article>
@@ -512,7 +539,7 @@
     <!-- ═══════════════════════════════════════════════
          PROJECT DETAILS MODAL
     ════════════════════════════════════════════════ -->
-    <div id="projectModal" class="project-modal" aria-hidden="true">
+    <div id="projectModal" class="project-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
         <div class="modal-overlay absolute inset-0 bg-black/85 backdrop-blur-lg"></div>
         <div class="modal-content glass-card">
             <button class="modal-close absolute top-5 right-5 bg-white/5 border border-gold-300/10 text-slate-100 text-3xl w-10 h-10 rounded-full flex items-center justify-center cursor-pointer z-10 transition-all duration-300 leading-none hover:bg-red-500/20 hover:border-red-500 hover:text-red-400 hover:rotate-90"

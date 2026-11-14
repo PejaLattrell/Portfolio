@@ -353,6 +353,7 @@ function initTerminal() {
                     writeLine('  - <span class="term-cyan">Campus Lost & Found</span>     : Next.js, Supabase, Vercel');
                     writeLine('  - <span class="term-cyan">SkyCast Weather App</span>     : React, Weather API, Vercel');
                     writeLine('  - <span class="term-cyan">NEU MOA Monitoring</span>      : React JS, Firebase, Node JS');
+                    writeLine('  - <span class="term-cyan">AI Lead Qualification</span>   : n8n, Gemini, Ollama, Google Sheets, Docker');
                     handleRedirect('projects');
                     break;
 
@@ -576,6 +577,8 @@ function initProjectsModal() {
     const modalDescription = document.getElementById('modalDescription');
     const modalLiveLink = document.getElementById('modalLiveLink');
     const modalGithubLink = document.getElementById('modalGithubLink');
+    const modalActions = modal ? modal.querySelector('.modal-actions') : null;
+    let lastFocusedElement = null;
 
     if (!modal || projectCards.length === 0) return;
 
@@ -593,8 +596,8 @@ function initProjectsModal() {
             const longDesc = card.getAttribute('data-details') || shortDesc;
             const tagsHTML = card.querySelector('.project-tags').innerHTML;
             
-            const liveBtn = card.querySelector('.link-primary');
-            const githubBtn = card.querySelector('.link-secondary');
+            const liveBtn = card.querySelector('a.link-primary');
+            const githubBtn = card.querySelector('a.link-secondary');
             
             const liveHref = liveBtn ? liveBtn.getAttribute('href') : '';
             const githubHref = githubBtn ? githubBtn.getAttribute('href') : '';
@@ -608,6 +611,7 @@ function initProjectsModal() {
                 modalLiveLink.setAttribute('href', liveHref);
                 modalLiveLink.style.display = 'inline-flex';
             } else {
+                modalLiveLink.removeAttribute('href');
                 modalLiveLink.style.display = 'none';
             }
 
@@ -615,18 +619,27 @@ function initProjectsModal() {
                 modalGithubLink.setAttribute('href', githubHref);
                 modalGithubLink.style.display = 'inline-flex';
             } else {
+                modalGithubLink.removeAttribute('href');
                 modalGithubLink.style.display = 'none';
             }
 
+            if (modalActions) modalActions.style.display = liveHref || githubHref ? 'flex' : 'none';
+
             // Show modal
+            lastFocusedElement = document.activeElement;
             modal.classList.add('modal-active');
+            modal.setAttribute('aria-hidden', 'false');
+            modal.querySelector('.modal-content').scrollTop = 0;
             document.body.style.overflow = 'hidden'; // prevent page scroll
+            if (modalClose) modalClose.focus();
         });
     });
 
     function closeModal() {
         modal.classList.remove('modal-active');
+        modal.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = ''; // restore page scroll
+        if (lastFocusedElement) lastFocusedElement.focus();
     }
 
     if (modalClose) modalClose.addEventListener('click', closeModal);

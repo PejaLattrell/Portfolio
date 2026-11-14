@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="title description">
+  <title id="title">AI lead response and qualification workflow</title>
+  <desc id="description">An inbound inquiry passes through n8n AI qualification and branches into a booking invitation, a scheduled follow-up, or owner review.</desc>
+  <defs>
+    <linearGradient id="background" x2="1" y2="1">
+      <stop stop-color="#19170f"/>
+      <stop offset="1" stop-color="#0c0d10"/>
+    </linearGradient>
+    <linearGradient id="node" x2="1" y2="1">
+      <stop stop-color="#30291a"/>
+      <stop offset="1" stop-color="#171715"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1" fill="#d4af37" opacity=".13"/>
+    </pattern>
+  </defs>
+  <rect width="960" height="540" fill="url(#background)"/>
+  <rect width="960" height="540" fill="url(#grid)"/>
+  <g font-family="Inter, Segoe UI, Arial, sans-serif">
+    <text x="56" y="65" fill="#d4af37" font-size="18" font-weight="600" letter-spacing="4">WORKFLOW AUTOMATION</text>
+    <text x="56" y="126" fill="#f1f5f9" font-size="44" font-weight="700">AI lead response</text>
+    <rect x="803" y="43" width="101" height="61" rx="18" fill="#ff6d5a" fill-opacity=".12" stroke="#ff6d5a" stroke-opacity=".4"/>
+    <text x="853" y="84" fill="#ff9385" font-size="32" font-weight="700" text-anchor="middle">n8n</text>
+
+    <g fill="none" stroke="#d4af37" stroke-width="3">
+      <path d="M254 301H351"/>
+      <path d="M581 301H636V220H700M636 301H700M636 301V382H700"/>
+    </g>
+    <g fill="#d4af37">
+      <circle cx="254" cy="301" r="5"/>
+      <circle cx="351" cy="301" r="5"/>
+      <circle cx="581" cy="301" r="5"/>
+      <circle cx="636" cy="301" r="6"/>
+    </g>
+
+    <rect x="56" y="214" width="198" height="174" rx="22" fill="#191b1c" stroke="#4c4633" stroke-width="2"/>
+    <rect x="126" y="246" width="58" height="43" rx="8" fill="none" stroke="#b8b6ad" stroke-width="3"/>
+    <path d="m128 250 27 21 27-21" fill="none" stroke="#b8b6ad" stroke-width="3" stroke-linejoin="round"/>
+    <text x="155" y="335" fill="#f1f5f9" font-size="25" font-weight="600" text-anchor="middle">Inquiry</text>
+    <text x="155" y="364" fill="#999b9e" font-size="18" text-anchor="middle">Validate + deduplicate</text>
+
+    <rect x="351" y="214" width="230" height="174" rx="22" fill="url(#node)" stroke="#d4af37" stroke-width="2"/>
+    <path d="m466 238 8 21 22 8-22 8-8 22-8-22-22-8 22-8Z" fill="#d4af37"/>
+    <path d="m495 236 3 8 9 3-9 3-3 9-3-9-8-3 8-3Z" fill="#f7e7a0"/>
+    <text x="466" y="335" fill="#f7e7a0" font-size="25" font-weight="600" text-anchor="middle">AI qualification</text>
+    <text x="466" y="364" fill="#b5aa8d" font-size="18" text-anchor="middle">Gemini + Ollama</text>
+
+    <g font-size="23" font-weight="600">
+      <rect x="700" y="183" width="204" height="74" rx="16" fill="#19251f" stroke="#59806a"/>
+      <circle cx="725" cy="220" r="5" fill="#93bfa1"/>
+      <text x="745" y="228" fill="#b2d3bb">Book a call</text>
+      <rect x="700" y="264" width="204" height="74" rx="16" fill="#2d2616" stroke="#8f7532"/>
+      <circle cx="725" cy="301" r="5" fill="#d4af37"/>
+      <text x="745" y="309" fill="#e8d28a">Follow up</text>
+      <rect x="700" y="345" width="204" height="74" rx="16" fill="#1c2029" stroke="#58647d"/>
+      <circle cx="725" cy="382" r="5" fill="#a3b2cf"/>
+      <text x="745" y="390" fill="#c0cce2">Owner review</text>
+    </g>
+
+    <path d="M56 464H904" stroke="#d4af37" stroke-opacity=".16"/>
+    <text x="56" y="505" fill="#999b9e" font-size="20">Gmail replies</text>
+    <circle cx="225" cy="498" r="3" fill="#d4af37"/>
+    <text x="248" y="505" fill="#999b9e" font-size="20">Google Sheets CRM</text>
+    <circle cx="469" cy="498" r="3" fill="#d4af37"/>
+    <text x="492" y="505" fill="#999b9e" font-size="20">Telegram alerts</text>
+  </g>
+</svg>
